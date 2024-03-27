@@ -1,0 +1,28 @@
+<template>
+  <div>
+    Ajout: <input type="text" v-model="task"/>
+    <button @click="addTaskToList">Valider</button>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      task: '',
+    };
+  },
+
+  methods: {
+    addTaskToList() {
+      if (this.task.trim() !== '') {
+        this.$emit('task-added', this.task);
+        this.task = '';
+      }
+    },
+  },
+};
+</script>
+
+<style scoped>
+</style>
