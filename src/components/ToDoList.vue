@@ -1,12 +1,11 @@
 <template>
-  <div>
     <ul>
       <li v-for="(item, index) in todoList" :key="index">
-        {{ item }}
+        <input type="checkbox" :id="'checkbox-' + index" v-model="isChecked" />
+        <label for="checkbox" :class="{ 'styled': isChecked }">{{ item }}</label>
       </li>
     </ul>
     <ToDoInput  @task-added="addTask"></ToDoInput>
-  </div>
 </template>
 
 <script>
@@ -19,7 +18,8 @@ export default {
 
   data() {
     return {
-      todoList: []
+      todoList: [],
+      isChecked: false
     };
   },
 
@@ -38,14 +38,24 @@ export default {
         this.todoList = JSON.parse(savedList);
       }
     },
+
     addTask(task) {
       this.todoList.push(task);
       this.saveList();
       this.loadList();
+    },
+
+    toggleTask(task) {
+      task.clicked = !task.clicked;
     }
   }
 };
 </script>
 
+
+
 <style scoped>
+  .styled {
+    text-decoration: line-through;
+  }
 </style>

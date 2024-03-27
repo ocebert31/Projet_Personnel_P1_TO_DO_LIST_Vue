@@ -1,8 +1,6 @@
 <template>
-  <div>
     Ajout: <input type="text" v-model="task"/>
     <button @click="addTaskToList">Valider</button>
-  </div>
 </template>
 
 <script>
