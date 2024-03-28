@@ -16,8 +16,7 @@ export default {
   
     methods: {
         deleteTask() {
-            // Supprimer l'élément de la liste en utilisant son index
-            this.$emit('task-deleted', this.index); // Émettre un événement pour signaler la suppression de la tâche
+          this.$emit('task-deleted', this.index); 
         }
     }
 }

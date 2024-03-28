@@ -1,8 +1,7 @@
 <template>
     <ul>
       <li v-for="(item, index) in todoList" :key="index" class="style-liste">
-        <ToDoDeleteButton @task-deleted="deleteTask" :index="index"></ToDoDeleteButton>
-        <ToDoTask :task="item" :index="index"  @task-updated="updateTask"></ToDoTask>
+        <ToDoTask :task="item" :index="index"  @task-updated="updateTask" @task-deleted="deleteTask"></ToDoTask>
       </li>
     </ul>
     <ToDoInput  @task-added="addTask"></ToDoInput>
@@ -11,13 +10,11 @@
 <script>
 import ToDoInput from './ToDoAdd.vue';
 import ToDoTask from './ToDoTask.vue';
-import ToDoDeleteButton from './Task/ToDoDelete.vue';
 
 export default {
   components: {
     ToDoInput,
     ToDoTask,
-    ToDoDeleteButton
   },
 
   data() {
