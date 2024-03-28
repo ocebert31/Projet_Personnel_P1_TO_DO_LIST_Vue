@@ -1,8 +1,7 @@
 <template>
     <ul>
-      <li v-for="(item, index) in todoList" :key="index">
-        <input type="checkbox" :id="'checkbox-' + index" v-model="isChecked" />
-        <label for="checkbox" :class="{ 'styled': isChecked }">{{ item }}</label>
+      <li v-for="(item, index) in todoList" :key="index" class="style-liste">
+        <ToDoTask :task="item" :index="index"></ToDoTask>
       </li>
     </ul>
     <ToDoInput  @task-added="addTask"></ToDoInput>
@@ -10,16 +9,17 @@
 
 <script>
 import ToDoInput from './ToDoInput.vue';
+import ToDoTask from './ToDoTask.vue';
 
 export default {
   components: {
-    ToDoInput
+    ToDoInput,
+    ToDoTask
   },
 
   data() {
     return {
       todoList: [],
-      isChecked: false
     };
   },
 
@@ -44,18 +44,13 @@ export default {
       this.saveList();
       this.loadList();
     },
-
-    toggleTask(task) {
-      task.clicked = !task.clicked;
-    }
   }
 };
 </script>
 
-
-
-<style scoped>
-  .styled {
-    text-decoration: line-through;
+<style>
+  .style-liste{
+    list-style: none;
   }
 </style>
+

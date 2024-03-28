@@ -11,6 +11,8 @@ export default {
     };
   },
 
+  emits: ['task-added'],
+
   methods: {
     addTaskToList() {
       if (this.task.trim() !== '') {

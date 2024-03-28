@@ -1,14 +1,14 @@
 <template>
-    <HelloWorld/>
+    <ToDoList/>
 </template>
   
   <script>
-  import HelloWorld from './components/ToDoList.vue'
+  import ToDoList from './components/ToDoList.vue'
   
   export default {
     name: 'App',
     components: {
-      HelloWorld
+      ToDoList
     }
   }
   </script>
