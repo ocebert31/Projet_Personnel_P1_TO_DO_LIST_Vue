@@ -1,23 +1,26 @@
 <template>
     <div>
-      <input type="checkbox" :id="'checkbox-' + index" v-model="isChecked" />
-      <label :for="'checkbox-' + index" :class="{ 'styled': isChecked }">{{ task }}</label>
+      <ToDoChecked :task="task" :index="index" @toggle-task-checked="toggleTaskIsChecked"></ToDoChecked>
+      <ToDoName :task="task" :index="index"></ToDoName>
     </div>
 </template>
   
 <script>
-  export default {
-    props: ['task', 'index'],
-    data() {
-      return {
-        isChecked: false
-      };
-    },
-  }
-</script>
+import ToDoChecked from './Task/ToDoIsChecked.vue';
+import ToDoName from './Task/ToDoName.vue';
+export default {
+  props: ['task', 'index'],
 
-<style scoped>
-  .styled {
-    text-decoration: line-through;
+ components: {
+  ToDoChecked,
+  ToDoName
+ },
+
+ methods: {
+  toggleTaskIsChecked() {
+    const updatedTask = {name: this.task.name, isChecked: !this.task.isChecked}
+    this.$emit('task-updated', this.index, updatedTask);
   }
-</style>
+ }
+}
+</script>
