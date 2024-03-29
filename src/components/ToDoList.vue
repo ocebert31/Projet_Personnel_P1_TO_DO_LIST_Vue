@@ -55,7 +55,7 @@ export default {
     },
 
     confirmEdit(index, task) {
-      this.todoList[index] = task.name;
+      this.todoList[index] = task;
       this.saveList();
     },
   }

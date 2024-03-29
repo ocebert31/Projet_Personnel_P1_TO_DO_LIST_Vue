@@ -12,11 +12,9 @@ export default {
     FontAwesomeIcon
   },
 
-  props: ['index'],
-
   methods: {
     confirmEdit() {
-        this.$emit('edit-confirmed', this.index); 
+        this.$emit('edit-confirmed'); 
     }
   }
 }

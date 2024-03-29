@@ -1,14 +1,14 @@
 <template>
   <div class="alignement">
     <ToDoChecked :task="task" :index="index" @toggle-task-checked="toggleTaskIsChecked"></ToDoChecked>
-    <ToDoName :task="task" :index="index" :isEditing="isEditing"></ToDoName>
+    <ToDoName :task="task" :isEditing="isEditing" :newName="newName" @name-changed="changeName"></ToDoName>
   <div v-if="!isEditing" style="display: flex;">
     <ToDoEdit @edit-mode-toggled="toggleEditMode" class="style-bouton-mode-normal"></ToDoEdit>
     <ToDoDelete @task-deleted="deleteTask" :index="index" class="style-bouton-mode-normal"></ToDoDelete>
   </div>
   <div v-else>
     <ToDoDelete @task-deleted="deleteTask" :index="index"></ToDoDelete>
-    <ToDoConfirmEdit @edit-confirmed="confirmEdit" :index="index" :isValidate="isValidate"></ToDoConfirmEdit>
+    <ToDoConfirmEdit @edit-confirmed="confirmEdit" :index="index"></ToDoConfirmEdit>
     <ToDoCancelEdit @edit-canceled="toggleEditMode"></ToDoCancelEdit>
   </div>
   </div>
@@ -37,7 +37,7 @@ export default {
  data() {
     return {
       isEditing: false,
-      isValidate:false,
+      newName: this.task.name,
     };
   },
 
@@ -56,9 +56,14 @@ export default {
   },
 
   confirmEdit() {
-    const editedTask = {name: this.task.name, isValidate: !this.task.isValidate}
-    this.$emit()('confirmed-edit', this.index, editedTask)
+    const updatedTask = {name: this.newName, isChecked: this.task.isChecked}
+    this.$emit('task-updated', this.index, updatedTask);
+    this.toggleEditMode();
   },
+  
+  changeName(newName) {
+    this.newName = newName;
+  }
  }
 }
 </script>
