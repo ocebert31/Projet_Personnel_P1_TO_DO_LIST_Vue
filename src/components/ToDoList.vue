@@ -1,7 +1,7 @@
 <template>
     <ul>
       <li v-for="(item, index) in todoList" :key="index" class="style-liste">
-        <ToDoTask :task="item" :index="index"  @task-updated="updateTask" @task-deleted="deleteTask"></ToDoTask>
+        <ToDoTask :task="item" :index="index"  @task-updated="updateTask" @task-deleted="deleteTask" @confirmed-edit="confirmEdit"></ToDoTask>
       </li>
     </ul>
     <ToDoInput  @task-added="addTask"></ToDoInput>
@@ -51,6 +51,11 @@ export default {
 
     updateTask(index, task) {
       this.todoList[index] = task;
+      this.saveList();
+    },
+
+    confirmEdit(index, task) {
+      this.todoList[index] = task.name;
       this.saveList();
     },
   }

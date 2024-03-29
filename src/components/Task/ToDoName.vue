@@ -1,6 +1,6 @@
 <template>
     <label :for="'checkbox-' + index" :class="{ 'styled': task.isChecked }" v-if="!isEditing">{{ task.name }}</label>
-    <input :for="'checkbox-' + index" v-if="isEditing" :value="task.name" type="text" />
+    <input :for="'checkbox-' + index" v-else :value="task.name" type="text" />
 </template>
 
 <script>

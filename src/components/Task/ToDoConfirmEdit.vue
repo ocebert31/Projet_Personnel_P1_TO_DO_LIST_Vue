@@ -1,9 +1,9 @@
 <template>
-    <button @click="deleteTask">
-      <font-awesome-icon icon="fa-trash" />
+    <button @click="confirmEdit">
+      <font-awesome-icon icon="fa-check" />
     </button>
 </template>
-    
+
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
     
@@ -15,10 +15,9 @@ export default {
   props: ['index'],
 
   methods: {
-    deleteTask() {
-      this.$emit('task-deleted', this.index); 
+    confirmEdit() {
+        this.$emit('edit-confirmed', this.index); 
     }
   }
 }
 </script>
-  
