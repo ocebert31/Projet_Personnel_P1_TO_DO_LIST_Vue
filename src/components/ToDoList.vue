@@ -52,7 +52,7 @@ export default {
     updateTask(index, task) {
       this.todoList[index] = task;
       this.saveList();
-    }
+    },
   }
 };
 </script>

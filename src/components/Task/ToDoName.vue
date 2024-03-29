@@ -1,10 +1,11 @@
 <template>
-    <label :for="'checkbox-' + index" :class="{ 'styled': task.isChecked }">{{ task.name }}</label>
+    <label :for="'checkbox-' + index" :class="{ 'styled': task.isChecked }" v-if="!isEditing">{{ task.name }}</label>
+    <input :for="'checkbox-' + index" v-if="isEditing" :value="task.name" type="text" />
 </template>
 
 <script>
 export default {
-    props: ['task', 'index'],
+    props: ['task', 'index', 'isEditing'],
 }
 </script>
 
