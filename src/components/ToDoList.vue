@@ -45,13 +45,14 @@ export default {
     },
 
     deleteTask(index) {
-      console.log('liste-receive-delete');
-      console.log(index);
       this.todoList.splice(index, 1);
       this.saveList();
     },
 
     updateTask(index, task) {
+      for (let i = 0; i < this.todoList.length; i++) {
+        this.todoList[i].isEditing = false;
+      }
       this.todoList[index] = task;
       this.saveList();
     },

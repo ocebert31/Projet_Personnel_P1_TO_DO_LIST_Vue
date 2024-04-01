@@ -57,7 +57,7 @@ export default {
   changeName(newName) {
     const updatedTask = {...this.task, newName: newName}
     this.$emit('task-updated', this.index, updatedTask);
-  }
+  },
  }
 }
 </script>
