@@ -1,5 +1,5 @@
 <template>
-    Ajout: <input type="text" v-model="task"/>
+    Ajout: <input type="text" v-model="task" placeholder="Ajoute une tâche"/>
     <button @click="addTaskToList">Valider</button>
 </template>
 

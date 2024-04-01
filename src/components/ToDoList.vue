@@ -40,11 +40,13 @@ export default {
     },
 
     addTask(task) {
-      this.todoList.push({name: task});
+      this.todoList.push({name: task, isEditing: false, isChecked: false, newName: task});
       this.saveList();
     },
 
     deleteTask(index) {
+      console.log('liste-receive-delete');
+      console.log(index);
       this.todoList.splice(index, 1);
       this.saveList();
     },

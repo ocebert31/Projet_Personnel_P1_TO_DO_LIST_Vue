@@ -1,16 +1,16 @@
 <template>
   <div class="alignement">
     <ToDoChecked :task="task" :index="index" @toggle-task-checked="toggleTaskIsChecked"></ToDoChecked>
-    <ToDoName :task="task" :isEditing="isEditing" :newName="newName" @name-changed="changeName"></ToDoName>
-  <div v-if="!isEditing" style="display: flex;">
-    <ToDoEdit @edit-mode-toggled="toggleEditMode" class="style-bouton-mode-normal"></ToDoEdit>
-    <ToDoDelete @task-deleted="deleteTask" :index="index" class="style-bouton-mode-normal"></ToDoDelete>
-  </div>
-  <div v-else>
-    <ToDoDelete @task-deleted="deleteTask" :index="index"></ToDoDelete>
-    <ToDoConfirmEdit @edit-confirmed="confirmEdit" :index="index"></ToDoConfirmEdit>
-    <ToDoCancelEdit @edit-canceled="toggleEditMode"></ToDoCancelEdit>
-  </div>
+    <ToDoName :task="task" @name-changed="changeName"></ToDoName>
+    <div v-if="!task.isEditing" style="display: flex;">
+      <ToDoEdit @edit-mode-toggled="toggleTaskIsEditing" class="style-bouton-mode-normal"></ToDoEdit>
+      <ToDoDelete @task-deleted="deleteTask" :index="index" class="style-bouton-mode-normal"></ToDoDelete>
+    </div>
+    <div v-else>
+      <ToDoDelete @task-deleted="deleteTask" :index="index"></ToDoDelete>
+      <ToDoConfirmEdit @edit-confirmed="confirmEdit" :index="index"></ToDoConfirmEdit>
+      <ToDoCancelEdit @edit-canceled="toggleTaskIsEditing"></ToDoCancelEdit>
+    </div>
   </div>
 </template>
 
@@ -34,16 +34,14 @@ export default {
   ToDoCancelEdit
  },
 
- data() {
-    return {
-      isEditing: false,
-      newName: this.task.name,
-    };
-  },
-
  methods: {
   toggleTaskIsChecked() {
-    const updatedTask = {name: this.task.name, isChecked: !this.task.isChecked}
+    const updatedTask = {...this.task, isChecked: !this.task.isChecked };
+    this.$emit('task-updated', this.index, updatedTask);
+  },
+
+  toggleTaskIsEditing() {
+    const updatedTask = {...this.task, newName: this.task.name, isEditing: !this.task.isEditing };
     this.$emit('task-updated', this.index, updatedTask);
   },
 
@@ -51,18 +49,14 @@ export default {
     this.$emit('task-deleted', this.index);
   },
 
-  toggleEditMode() {
-    this.isEditing = !this.isEditing;
-  },
-
   confirmEdit() {
-    const updatedTask = {name: this.newName, isChecked: this.task.isChecked}
+    const updatedTask = {...this.task, name: this.task.newName, isEditing: !this.task.isEditing }
     this.$emit('task-updated', this.index, updatedTask);
-    this.toggleEditMode();
   },
   
   changeName(newName) {
-    this.newName = newName;
+    const updatedTask = {...this.task, newName: newName}
+    this.$emit('task-updated', this.index, updatedTask);
   }
  }
 }
