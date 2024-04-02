@@ -1,5 +1,8 @@
 <template>
-  <ToDoClear @tasks-cleared="clearTasks"></ToDoClear>
+  <div style="display: flex; gap: 30px">
+    <ToDoFilter @alphabétique-order-filtered="filterOrderAlphabetique" @alphabétique-desorder-filtered="filterDesorderAlphabetique" @filter-most-recent-to-oldest="filterMostRecentToOldest"></ToDoFilter>
+    <ToDoClear @tasks-cleared="clearTasks"></ToDoClear>
+  </div>
     <ul>
       <li v-for="(item, index) in todoList" :key="index" class="style-liste">
         <ToDoTask :task="item" :index="index"  @task-updated="updateTask" @task-deleted="deleteTask" @confirmed-edit="confirmEdit"></ToDoTask>
@@ -12,12 +15,15 @@
 import ToDoAdd from './ToDoAdd.vue';
 import ToDoTask from './ToDoTask.vue';
 import ToDoClear from './ToDoClear.vue';
+import ToDoFilter from './ToDoFilter.vue';
+import moment from 'moment';
 
 export default {
   components: {
     ToDoAdd,
     ToDoTask,
     ToDoClear,
+    ToDoFilter,
   },
 
   data() {
@@ -43,7 +49,9 @@ export default {
     },
 
     addTask(task) {
-      this.todoList.push({name: task, isEditing: false, isChecked: false, newName: task});
+      const currentDate = moment().format('YYYY-MM-DD HH:mm');
+      console.log(currentDate)
+      this.todoList.push({name: task, isEditing: false, isChecked: false, newName: task, date: currentDate});
       this.saveList();
     },
 
@@ -69,6 +77,27 @@ export default {
       this.todoList.splice(0, this.todoList.length);
       this.saveList();
     },
+
+    filterOrderAlphabetique() {
+      this.todoList.sort((a, b) => {
+        return a.name.localeCompare(b.name);
+      });
+      this.saveList();
+    },
+
+    filterDesorderAlphabetique() {
+      this.todoList.sort((a, b) => {
+        return b.name.localeCompare(a.name);
+      });
+      this.saveList();
+    },
+
+    filterMostRecentToOldest() {
+    this.todoList.sort((a, b) => {
+      return new Date(b.date) - new Date(a.date);
+    });
+    this.saveList();
+  },
   }
 };
 </script>
