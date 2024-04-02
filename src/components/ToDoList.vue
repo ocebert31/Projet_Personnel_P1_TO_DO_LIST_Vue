@@ -1,20 +1,23 @@
 <template>
+  <ToDoClear @tasks-cleared="clearTasks"></ToDoClear>
     <ul>
       <li v-for="(item, index) in todoList" :key="index" class="style-liste">
         <ToDoTask :task="item" :index="index"  @task-updated="updateTask" @task-deleted="deleteTask" @confirmed-edit="confirmEdit"></ToDoTask>
       </li>
     </ul>
-    <ToDoInput  @task-added="addTask"></ToDoInput>
+    <ToDoAdd  @task-added="addTask"></ToDoAdd>
 </template>
 
 <script>
-import ToDoInput from './ToDoAdd.vue';
+import ToDoAdd from './ToDoAdd.vue';
 import ToDoTask from './ToDoTask.vue';
+import ToDoClear from './ToDoClear.vue';
 
 export default {
   components: {
-    ToDoInput,
+    ToDoAdd,
     ToDoTask,
+    ToDoClear,
   },
 
   data() {
@@ -59,6 +62,11 @@ export default {
 
     confirmEdit(index, task) {
       this.todoList[index] = task;
+      this.saveList();
+    },
+
+    clearTasks() {
+      this.todoList.splice(0, this.todoList.length);
       this.saveList();
     },
   }
