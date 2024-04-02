@@ -1,6 +1,6 @@
 <template>
   <div style="display: flex; gap: 30px">
-    <ToDoFilter @alphabétique-order-filtered="filterOrderAlphabetique" @alphabétique-desorder-filtered="filterDesorderAlphabetique" @filter-most-recent-to-oldest="filterMostRecentToOldest"></ToDoFilter>
+    <ToDoFilter @select-changed="orderTask"></ToDoFilter>
     <ToDoClear @tasks-cleared="clearTasks"></ToDoClear>
   </div>
     <ul>
@@ -49,7 +49,7 @@ export default {
     },
 
     addTask(task) {
-      const currentDate = moment().format('YYYY-MM-DD HH:mm');
+      const currentDate = moment().format('YYYY-MM-DD HH:mm:ss');
       console.log(currentDate)
       this.todoList.push({name: task, isEditing: false, isChecked: false, newName: task, date: currentDate});
       this.saveList();
@@ -74,30 +74,59 @@ export default {
     },
 
     clearTasks() {
-      this.todoList.splice(0, this.todoList.length);
+      localStorage.removeItem('todoList');
+      this.todoList = [];
       this.saveList();
     },
 
-    filterOrderAlphabetique() {
+    orderTask(order) {
+      this.selected = order
+      if (order === "name-asc") {
+        this.orderByNameAsc();
+      } else if (order === "name-desc") {
+        this.orderByNameDesc();
+      } else if (order === "date-desc") {
+        this.orderByDateDesc();
+      } else if (order === "date-asc") {
+        this.orderByDateAsc();
+      }
+    },
+
+    orderByNameAsc() {
+      if (this.selected === "name-asc") {
+        this.todoList.sort((a, b) => {
+          return a.name.localeCompare(b.name);
+        });
+        this.saveList();
+      } 
+    },
+
+    orderByNameDesc() {
+      if (this.selected === "name-desc") {
+        this.todoList.sort((a, b) => {
+          return b.name.localeCompare(a.name);
+        });
+        this.saveList();
+      }
+    },
+
+    orderByDateDesc() {
+      if (this.selected === "date-desc") {
+        this.todoList.sort((a, b) => {
+          return new Date(b.date) - new Date(a.date);
+        });
+        this.saveList();
+      }
+    },
+
+    orderByDateAsc() {
+      if (this.selected === "date-asc") {
       this.todoList.sort((a, b) => {
-        return a.name.localeCompare(b.name);
+        return new Date(a.date) - new Date(b.date);
       });
       this.saveList();
-    },
-
-    filterDesorderAlphabetique() {
-      this.todoList.sort((a, b) => {
-        return b.name.localeCompare(a.name);
-      });
-      this.saveList();
-    },
-
-    filterMostRecentToOldest() {
-    this.todoList.sort((a, b) => {
-      return new Date(b.date) - new Date(a.date);
-    });
-    this.saveList();
-  },
+      }
+    }
   }
 };
 </script>
