@@ -8,6 +8,9 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap'
+
 
 library.add(faTrash, faPen, faCheck, faXmark, faRotateRight)
 

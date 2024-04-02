@@ -1,6 +1,6 @@
 <template>
   <select v-model="selected" @change="changeSelect">
-    <option disabled value="">Veuillez en sélectionner un</option>
+    <option value="date-asc"></option>
     <option value="name-asc">Par Ordre de l'alphabet</option>
     <option value="name-desc">Par Ordre inverse de l'alphabet</option>
     <option value="date-desc">Du plus récent au plus vieux</option>

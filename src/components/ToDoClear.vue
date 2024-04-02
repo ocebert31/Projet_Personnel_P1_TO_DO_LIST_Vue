@@ -4,8 +4,8 @@
       <font-awesome-icon icon="fa-rotate-right" />
       Tout supprimer
     </button>
-    <div v-if="showConfirmationDialog" class="modal">
-      <div class="modal-content">
+    <div v-if="showConfirmationDialog" class="clear-modal">
+      <div class="clear-modal-content">
         <span class="close" @click="closeConfirmationDialog">&times;</span>
         <h2>Confirmation</h2>
         <p>Voulez-vous vraiment tout supprimer ?</p>
@@ -32,6 +32,7 @@ export default {
 
   methods: {
     openConfirmationDialog() {
+      console.log('pouet');
       this.showConfirmationDialog = true;
     },
 
@@ -48,7 +49,7 @@ export default {
 </script>
 
 <style>
-.modal {
+.clear-modal {
   display: block;
   position: fixed;
   z-index: 9999;
@@ -59,7 +60,7 @@ export default {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-content {
+.clear-modal-content {
   background-color: #fff;
   margin: 10% auto;
   padding: 20px;

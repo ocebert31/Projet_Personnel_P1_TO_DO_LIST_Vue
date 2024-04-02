@@ -1,14 +1,24 @@
 <template>
-  <div style="display: flex; gap: 30px">
-    <ToDoFilter @select-changed="orderTask"></ToDoFilter>
-    <ToDoClear @tasks-cleared="clearTasks"></ToDoClear>
+  <div style="display: flex;" class="col-sm-8 container bg-custom-gradient">
+    <div class="container" style="background-color: white; margin: 40px; border-radius: 20px;">
+      <h1 class="text-left mb-4">To Do List</h1>
+      <ToDoAdd  @task-added="addTask"></ToDoAdd>
+      <div class="d-flex gap-3">
+        <ToDoFilter @select-changed="orderTask"></ToDoFilter>
+        <ToDoClear @tasks-cleared="clearTasks"></ToDoClear>
+      </div>
+      <ul class="mx-auto" style="padding-left: 0;">
+        <li v-for="(item, index) in todoList" :key="index" class="style-liste">
+          <ToDoTask :task="item" :index="index"  @task-updated="updateTask" @task-deleted="deleteTask" @confirmed-edit="confirmEdit"></ToDoTask>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-7 text-center" style="display: flex; justify-content: center; align-items: center;">
+      <p style="font-size: 1.5vw; color: white;">
+        To Do List with Vue.js and Bootstrap by Bertrand Oceane
+      </p>
+    </div>
   </div>
-    <ul>
-      <li v-for="(item, index) in todoList" :key="index" class="style-liste">
-        <ToDoTask :task="item" :index="index"  @task-updated="updateTask" @task-deleted="deleteTask" @confirmed-edit="confirmEdit"></ToDoTask>
-      </li>
-    </ul>
-    <ToDoAdd  @task-added="addTask"></ToDoAdd>
 </template>
 
 <script>
@@ -74,9 +84,8 @@ export default {
     },
 
     clearTasks() {
-      localStorage.removeItem('todoList');
-      this.todoList = [];
-      this.saveList();
+      localStorage.setItem('todoList', JSON.stringify([]));
+      this.loadList();
     },
 
     orderTask(order) {
@@ -136,5 +145,8 @@ export default {
     list-style: none;
     display: flex;
   }
-</style>
 
+  .bg-custom-gradient {
+    background: linear-gradient(90deg, #8cc0af, #779c91, #a29a96);
+  }
+</style>
