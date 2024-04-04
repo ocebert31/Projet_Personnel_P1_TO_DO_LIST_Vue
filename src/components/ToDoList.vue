@@ -1,20 +1,28 @@
 <template>
-  <div style="display: flex;" class="col-sm-8 container bg-custom-gradient">
-    <div class="container" style="background-color: white; margin: 40px; border-radius: 20px;">
-      <h1 class="text-left mb-4">To Do List</h1>
-      <ToDoAdd  @task-added="addTask"></ToDoAdd>
-      <div class="d-flex gap-3">
-        <ToDoFilter @select-changed="orderTask"></ToDoFilter>
-        <ToDoClear @tasks-cleared="clearTasks"></ToDoClear>
+  <div class="row g-0 text-center bg-custom-gradient">
+    <div class="col-6 col-md-4">
+      <div class="m-4 p-4 bg-white rounded">
+        <div class="d-flex flex-row mb-3 d-flex justify-content-between">
+          <h1 class="p-2 align-self-center">To Do List</h1>
+          <ToDoClear class="p-2 align-self-center" @tasks-cleared="clearTasks"></ToDoClear>
+        </div>
+        <div class="d-flex justify-content-left">
+          <ToDoFilter @select-changed="orderTask"></ToDoFilter>
+        </div>
+        <div>
+          <ul class="list-unstyled">
+            <li v-for="(item, index) in todoList" :key="index">
+              <ToDoTask :task="item" :index="index" @task-updated="updateTask" @task-deleted="deleteTask" @confirmed-edit="confirmEdit"></ToDoTask>
+            </li>
+          </ul>
+        </div>
+        <div class="d-flex justify-content-left">
+          <ToDoAdd @task-added="addTask"></ToDoAdd>
+        </div>
       </div>
-      <ul class="mx-auto" style="padding-left: 0;">
-        <li v-for="(item, index) in todoList" :key="index" class="style-liste">
-          <ToDoTask :task="item" :index="index"  @task-updated="updateTask" @task-deleted="deleteTask" @confirmed-edit="confirmEdit"></ToDoTask>
-        </li>
-      </ul>
     </div>
-    <div class="col-sm-7 text-center" style="display: flex; justify-content: center; align-items: center;">
-      <p style="font-size: 1.5vw; color: white;">
+    <div class="col-sm-6 col-md-8 d-flex justify-content-center align-items-center">
+      <p>
         To Do List with Vue.js and Bootstrap by Bertrand Oceane
       </p>
     </div>
@@ -141,11 +149,6 @@ export default {
 </script>
 
 <style>
-  .style-liste{
-    list-style: none;
-    display: flex;
-  }
-
   .bg-custom-gradient {
     background: linear-gradient(90deg, #8cc0af, #779c91, #a29a96);
   }
