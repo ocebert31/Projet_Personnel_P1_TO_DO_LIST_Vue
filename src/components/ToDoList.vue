@@ -6,7 +6,7 @@
           <h1 class="p-2 align-self-center fs-2">To Do List</h1>
           <ToDoClear class="p-2 align-self-center" @tasks-cleared="clearTasks"></ToDoClear>
         </div>
-        <div class="d-flex justify-content-left">
+        <div class="d-flex justify-content-left pb-3">
           <ToDoFilter @select-changed="orderTask"></ToDoFilter>
         </div>
         <div>

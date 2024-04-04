@@ -1,10 +1,10 @@
 <template>
-  <select v-model="selected" @change="changeSelect">
+  <select v-model="selected" @change="changeSelect" class="form-select border border-dark">
     <option value="date-asc"></option>
-    <option value="name-asc">Par Ordre de l'alphabet</option>
-    <option value="name-desc">Par Ordre inverse de l'alphabet</option>
-    <option value="date-desc">Du plus récent au plus vieux</option>
-    <option value="date-asc">Du plus vieux au plus récent</option>
+    <option value="name-asc" class="bg-secondary text-white">Par Ordre de l'alphabet</option>
+    <option value="name-desc" class="bg-secondary text-white">Par Ordre inverse de l'alphabet</option>
+    <option value="date-desc" class="bg-secondary text-white">Du plus récent au plus vieux</option>
+    <option value="date-asc" class="bg-secondary text-white">Du plus vieux au plus récent</option>
   </select>
 </template>
   

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="openConfirmationDialog">
+    <button @click="openConfirmationDialog" class="btn btn-outline btn-sm">
       <font-awesome-icon icon="fa-rotate-right" />
       Tout supprimer
     </button>
