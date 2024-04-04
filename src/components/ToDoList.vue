@@ -1,9 +1,9 @@
 <template>
-  <div class="row g-0 text-center bg-custom-gradient">
+  <div class="row g-0 text-center bg-custom-gradient vh-100 align-items-center">
     <div class="col-6 col-md-4">
-      <div class="m-4 p-4 bg-white rounded">
+      <div class="m-4 p-4 bg-white rounded box-custom">
         <div class="d-flex flex-row mb-3 d-flex justify-content-between">
-          <h1 class="p-2 align-self-center">To Do List</h1>
+          <h1 class="p-2 align-self-center fs-2">To Do List</h1>
           <ToDoClear class="p-2 align-self-center" @tasks-cleared="clearTasks"></ToDoClear>
         </div>
         <div class="d-flex justify-content-left">
@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="col-sm-6 col-md-8 d-flex justify-content-center align-items-center">
-      <p>
+      <p class="fs-2 text-white">
         To Do List with Vue.js and Bootstrap by Bertrand Oceane
       </p>
     </div>
@@ -151,5 +151,9 @@ export default {
 <style>
   .bg-custom-gradient {
     background: linear-gradient(90deg, #8cc0af, #779c91, #a29a96);
+  }
+
+  .box-custom {
+    box-shadow: 0px 0px 15px 5px rgba(255,255,255,0.5);
   }
 </style>
