@@ -1,7 +1,11 @@
 <template>
-    <input type="text" v-model="task" placeholder="Ajoute une tâche" class="form-control" style="border-radius: 5px 0px 0px 5px;"/>
-    <button @click="addTaskToList" class="btn btn-primary" style="border-radius: 0px 5px 5px 0px;">Valider</button>
+  <div class="input-group mb-3">
+    <input type="text" v-model="task" placeholder="Ajoute une tâche" class="form-control rounded-start-pill" />
+    <button @click="addTaskToList" class="btn btn-success">Valider</button>
+  </div>
 </template>
+
+
 
 <script>
 export default {
