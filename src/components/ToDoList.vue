@@ -22,8 +22,8 @@
       </div>
     </div>
     <div class="col-sm-6 col-md-8 d-flex justify-content-center align-items-center">
-      <p class="fs-2 text-white">
-        To Do List with Vue.js and Bootstrap by Bertrand Oceane
+      <p class="fs-2 text-white typing-animation">
+        <span>To Do List with Vue.js and Bootstrap by Bertrand Oceane</span>
       </p>
     </div>
   </div>
@@ -143,7 +143,7 @@ export default {
       });
       this.saveList();
       }
-    }
+    },
   }
 };
 </script>
@@ -155,5 +155,17 @@ export default {
 
   .box-custom {
     box-shadow: 0px 0px 15px 5px rgba(255,255,255,0.5);
+  }
+
+  @keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+  }
+
+  .typing-animation {
+    animation: typing 6s steps(60)alternate;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 0px solid white;
   }
 </style>
