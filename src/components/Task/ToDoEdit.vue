@@ -1,5 +1,5 @@
 <template>
-    <button @click="toggleEditMode">
+    <button @click="toggleEditMode" class="bg-white border border-0 text-primary">
       <font-awesome-icon icon="fa-pen" />
     </button>
 </template>

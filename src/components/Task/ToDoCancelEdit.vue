@@ -1,5 +1,5 @@
 <template>
-    <button @click="cancelEdit">
+    <button @click="cancelEdit" class="bg-white border border-0 text-danger">
       <font-awesome-icon icon="fa-xmark" />
     </button>
 </template>

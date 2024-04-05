@@ -1,5 +1,5 @@
 <template>
-    <button @click="deleteTask">
+    <button @click="deleteTask" class="bg-white border border-0 text-danger">
       <font-awesome-icon icon="fa-trash" />
     </button>
 </template>

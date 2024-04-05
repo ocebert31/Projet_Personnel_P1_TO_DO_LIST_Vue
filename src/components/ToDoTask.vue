@@ -1,10 +1,11 @@
 <template>
-  <div class="alignement">
+  <div class="d-flex">
     <ToDoChecked :task="task" :index="index" @toggle-task-checked="toggleTaskIsChecked"></ToDoChecked>
+    <div class="mx-1"></div>
     <ToDoName :task="task" @name-changed="changeName"></ToDoName>
-    <div v-if="!task.isEditing" style="display: flex;">
-      <ToDoEdit @edit-mode-toggled="toggleTaskIsEditing" class="style-bouton-mode-normal"></ToDoEdit>
-      <ToDoDelete @task-deleted="deleteTask" :index="index" class="style-bouton-mode-normal"></ToDoDelete>
+    <div v-if="!task.isEditing" class="d-flex">
+      <ToDoEdit @edit-mode-toggled="toggleTaskIsEditing" class="custom-button"></ToDoEdit>
+      <ToDoDelete @task-deleted="deleteTask" :index="index" class="custom-button"></ToDoDelete>
     </div>
     <div v-else>
       <ToDoDelete @task-deleted="deleteTask" :index="index"></ToDoDelete>
@@ -63,16 +64,11 @@ export default {
 </script>
 
 <style>
-.alignement {
-  display: flex;
-}
-
-.style-bouton-mode-normal {
+.custom-button {
   display: none;
-  position: relative;
 }
 
-.alignement:hover .style-bouton-mode-normal {
+.d-flex:hover .custom-button {
   display: inline-block;
 }
 </style>

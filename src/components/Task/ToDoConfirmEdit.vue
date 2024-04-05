@@ -1,5 +1,5 @@
 <template>
-    <button @click="confirmEdit">
+    <button @click="confirmEdit" class="bg-white border border-0 text-success">
       <font-awesome-icon icon="fa-check" />
     </button>
 </template>
