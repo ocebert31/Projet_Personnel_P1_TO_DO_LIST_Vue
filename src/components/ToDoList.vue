@@ -1,6 +1,6 @@
 <template>
   <div class="row g-0 text-center bg-custom-gradient vh-100 align-items-center">
-    <div class="col-lg-4 col-md-6">
+    <div class="col-lg-4 col-md-6 order-xs-2 order-md-1">
       <div class="m-4 p-4 bg-white rounded box-custom overflow-y-auto" style="max-height: 500px; width: auto;">
         <div class="d-flex flex-row mb-3 d-flex justify-content-between">
           <h1 class="p-2 align-self-center fs-2">To Do List</h1>
@@ -11,16 +11,13 @@
         </div>
         <div>
           <ul class="list-unstyled">
-            <!-- <draggable v-model="todoList" tag="ul" @start="drag=true" @end="drag=false" :move="changeOrder" item-key="date">
+            <draggable v-model="dragList" tag="ul" @start="drag=true" @end="saveOrderChanged" :move="changeOrder" item-key="date">
               <template #item="{element, index}">
                 <li :key="index">
                   <ToDoTask :task="element" :index="index" @task-updated="updateTask" @task-deleted="deleteTask" @confirmed-edit="confirmEdit"></ToDoTask>
                 </li>
               </template>
-            </draggable> -->
-            <li v-for="(item, index) in todoList" :key="index">
-              <ToDoTask class="task-name" :task="item" :index="index" @task-updated="updateTask" @task-deleted="deleteTask" @confirmed-edit="confirmEdit"></ToDoTask>
-            </li>
+            </draggable>
           </ul>
         </div>
         <div class="d-flex justify-content-left">
@@ -28,7 +25,7 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-8 col-md-6 d-flex justify-content-center align-items-center">
+    <div class="col-lg-8 col-md-6 d-flex justify-content-center align-items-center order-xs-1 order-md-2">
       <p class="fs-2 text-white typing-animation">
         <span>To Do List with Vue.js and Bootstrap by Bertrand Oceane</span>
       </p>
@@ -42,7 +39,7 @@ import ToDoTask from './ToDoTask.vue';
 import ToDoClear from './ToDoClear.vue';
 import ToDoFilter from './ToDoFilter.vue';
 import moment from 'moment';
-// import draggable from 'vuedraggable';
+import draggable from 'vuedraggable';
 
 export default {
   components: {
@@ -50,13 +47,16 @@ export default {
     ToDoTask,
     ToDoClear,
     ToDoFilter,
-    // draggable,
+    draggable,
   },
 
   data() {
     return {
       todoList: [],
+      dragList: [],
       drag: false,
+      dragIndex: null,
+      dragFutureIndex: null,
     };
   },
 
@@ -67,19 +67,21 @@ export default {
   methods: {
     saveList() {
       localStorage.setItem('todoList', JSON.stringify(this.todoList));
+      this.dragList = [...this.todoList];
     },
 
     loadList() {
       const savedList = localStorage.getItem('todoList');
       if (savedList) {
-        this.todoList = JSON.parse(savedList);
+        this.todoList = JSON.parse(savedList).sort((item1, item2) => item1.precedence - item2.precedence);
+        this.dragList = [...this.todoList];
       }
     },
 
     addTask(task) {
       const currentDate = moment().format('YYYY-MM-DD HH:mm:ss');
       console.log(currentDate)
-      this.todoList.push({name: task, isEditing: false, isChecked: false, newName: task, date: currentDate});
+      this.todoList.push({name: task, isEditing: false, isChecked: false, newName: task, date: currentDate, precedence: this.todoList.length });
       this.saveList();
     },
 
@@ -155,11 +157,22 @@ export default {
       }
     },
 
-    // changeOrder(event) {
-    //   const tasks =  this.todoList.splice(event.draggedContext.index, 1);
-    //   this.todoList.splice(event.draggedContext.futureIndex, 0, tasks[0])
-    //   this.saveList();
-    // },
+    changeOrder(event) {
+      this.dragIndex = event.draggedContext.index;
+      this.dragFutureIndex = event.draggedContext.futureIndex;
+    },
+
+    saveOrderChanged() {
+      this.drag = false;
+      if(this.dragIndex == null || this.dragFutureIndex == null) return true;
+      const tasks =  this.todoList.splice(this.dragIndex, 1);
+      this.todoList.splice(this.dragFutureIndex, 0, tasks[0]);
+      this.todoList.forEach((item, index) => item.precedence = index);
+      this.saveList();
+      this.dragIndex = null;
+      this.dragFutureIndex = null;
+      return true;
+    },
   }
 };
 </script>
