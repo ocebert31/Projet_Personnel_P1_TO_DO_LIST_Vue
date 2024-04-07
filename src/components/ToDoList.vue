@@ -10,11 +10,18 @@
           <ToDoFilter @select-changed="orderTask"></ToDoFilter>
         </div>
         <div>
-          <ul class="list-unstyled">
-            <li v-for="(item, index) in todoList" :key="index">
+          <!-- <ul class="list-unstyled"> -->
+            <draggable v-model="todoList" tag="ul" @start="drag=true" @end="drag=false" :move="changeOrder" item-key="date">
+              <template #item="{element, index}">
+                <li :key="index">
+                  <ToDoTask :task="element" :index="index" @task-updated="updateTask" @task-deleted="deleteTask" @confirmed-edit="confirmEdit"></ToDoTask>
+                </li>
+              </template>
+            </draggable>
+            <!-- <li v-for="(item, index) in todoList" :key="index">
               <ToDoTask :task="item" :index="index" @task-updated="updateTask" @task-deleted="deleteTask" @confirmed-edit="confirmEdit"></ToDoTask>
-            </li>
-          </ul>
+            </li> -->
+          <!-- </ul> -->
         </div>
         <div class="d-flex justify-content-left">
           <ToDoAdd @task-added="addTask"></ToDoAdd>
@@ -35,6 +42,7 @@ import ToDoTask from './ToDoTask.vue';
 import ToDoClear from './ToDoClear.vue';
 import ToDoFilter from './ToDoFilter.vue';
 import moment from 'moment';
+import draggable from 'vuedraggable';
 
 export default {
   components: {
@@ -42,11 +50,13 @@ export default {
     ToDoTask,
     ToDoClear,
     ToDoFilter,
+    draggable,
   },
 
   data() {
     return {
       todoList: [],
+      drag: false,
     };
   },
 
@@ -144,6 +154,12 @@ export default {
       this.saveList();
       }
     },
+
+    changeOrder(event) {
+      const tasks =  this.todoList.splice(event.draggedContext.index, 1);
+      this.todoList.splice(event.draggedContext.futureIndex, 0, tasks[0])
+      this.saveList();
+    },
   }
 };
 </script>
@@ -167,5 +183,9 @@ export default {
     white-space: nowrap;
     overflow: hidden;
     border-right: 0px solid white;
+  }
+
+  ul {
+    list-style-type: none;
   }
 </style>
