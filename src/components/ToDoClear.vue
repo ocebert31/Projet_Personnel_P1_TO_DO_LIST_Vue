@@ -7,9 +7,9 @@
     <div v-if="showConfirmationDialog" class="modal fade show" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header bg-light">
+          <div class="modal-header bg-light d-flex justify-content-between">
             <h5 class="modal-title">Confirmation</h5>
-            <button type="button" class="close" @click="closeConfirmationDialog">
+            <button type="button" class="bg-light border-0" @click="closeConfirmationDialog">
               <span>&times;</span>
             </button>
           </div>
