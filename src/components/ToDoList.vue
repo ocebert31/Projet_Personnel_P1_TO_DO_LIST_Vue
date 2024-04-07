@@ -118,6 +118,10 @@ export default {
         this.orderByDateDesc();
       } else if (order === "date-asc") {
         this.orderByDateAsc();
+      } else if (order === "precedence-desc") {
+        this.orderByPrecedenceDesc();
+      } else if (order === "precedence-asc") {
+        this.orderByPrecedenceAsc();
       }
     },
 
@@ -154,6 +158,24 @@ export default {
         return new Date(a.date) - new Date(b.date);
       });
       this.saveList();
+      }
+    },
+
+    orderByPrecedenceDesc() {
+      if (this.selected === "precedence-desc") {
+        this.todoList.sort((a, b) => {
+          return a.precedence - b.precedence;
+        });
+        this.saveList();
+      }
+    },
+
+    orderByPrecedenceAsc() {
+      if (this.selected === "precedence-asc") {
+        this.todoList.sort((a, b) => {
+          return b.precedence - a.precedence;
+        });
+        this.saveList();
       }
     },
 
