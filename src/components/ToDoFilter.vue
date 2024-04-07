@@ -25,3 +25,9 @@ export default {
   }
 }
 </script>
+
+<style>
+ .bg-secondary {
+  font-size: 14px;
+ }
+</style>

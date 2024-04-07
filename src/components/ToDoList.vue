@@ -1,32 +1,30 @@
 <template>
   <div class="row g-0 text-center bg-custom-gradient vh-100 align-items-center">
     <div class="col-md-5 order-2 order-md-1">
-      <div class="m-4 p-4 bg-white rounded box-custom overflow-y-auto" style="max-height: 500px; width: auto;">
-        <div class="d-flex flex-row mb-3 d-flex justify-content-between">
-          <h1 class="p-2 align-self-center fs-2">To Do List</h1>
-          <ToDoClear class="p-2 align-self-center" @tasks-cleared="clearTasks"></ToDoClear>
+      <div class="m-4 p-4 bg-white rounded box-custom overflow-y-auto" style="max-height: 400px; width: auto;">
+        <div class="d-lg-flex flex-row mb-3">
+          <h1 class="col p-2 align-self-center fs-4">To Do List</h1>
+          <ToDoClear class="col p-2 align-self-center" @tasks-cleared="clearTasks"></ToDoClear>
         </div>
         <div class="d-flex justify-content-left pb-3">
           <ToDoFilter @select-changed="orderTask"></ToDoFilter>
         </div>
-        <div>
-          <ul class="list-unstyled">
-            <draggable v-model="dragList" tag="ul" @start="drag=true" @end="saveOrderChanged" :move="changeOrder" item-key="date">
-              <template #item="{element, index}">
-                <li :key="index">
-                  <ToDoTask :task="element" :index="index" @task-updated="updateTask" @task-deleted="deleteTask" @confirmed-edit="confirmEdit"></ToDoTask>
-                </li>
-              </template>
-            </draggable>
-          </ul>
+        <div class="list-container">
+          <draggable v-model="dragList" tag="ul" @start="drag=true" @end="saveOrderChanged" :move="changeOrder" item-key="date">
+            <template #item="{element, index}">
+              <li :key="index">
+                <ToDoTask :task="element" :index="index" @task-updated="updateTask" @task-deleted="deleteTask" @confirmed-edit="confirmEdit"></ToDoTask>
+              </li>
+            </template>
+          </draggable>
         </div>
         <div class="d-flex justify-content-left">
           <ToDoAdd @task-added="addTask"></ToDoAdd>
         </div>
       </div>
     </div>
-    <div class="col-md-7 d-flex justify-content-center align-items-center order-1 order-md-2">
-      <p class="fs-3 text-white typing-animation">
+    <div class="col-md-7 d-flex justify-content-center align-items-center order-1 order-md-2 pt-3">
+      <p class="text-white typing-animation">
         To Do List with Vue.js and Bootstrap 
         <br>
         by Bertrand Oceane
@@ -222,11 +220,24 @@ export default {
     border-right: 0px solid white;
   }
 
-  ul {
+  .list-container > ul {
     list-style-type: none;
+    padding-left: 0;
   }
 
   .task-name {
     word-break: break-all;
+  }
+
+  @media (max-width: 576px) {
+    .typing-animation {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (min-width: 576px) {
+    .typing-animation {
+      font-size:  1.75rem;
+    }
   }
 </style>
