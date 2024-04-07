@@ -4,15 +4,26 @@
       <font-awesome-icon icon="fa-rotate-right" />
       Tout supprimer
     </button>
-    <div v-if="showConfirmationDialog" class="clear-modal">
-      <div class="clear-modal-content">
-        <span class="close" @click="closeConfirmationDialog">&times;</span>
-        <h2>Confirmation</h2>
-        <p>Voulez-vous vraiment tout supprimer ?</p>
-        <button @click="confirmClearTasks">Oui</button>
-        <button @click="closeConfirmationDialog">Non</button>
+    <div v-if="showConfirmationDialog" class="modal fade show" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-light">
+            <h5 class="modal-title">Confirmation</h5>
+            <button type="button" class="close" @click="closeConfirmationDialog">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Voulez-vous vraiment tout supprimer ?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" @click="confirmClearTasks">Oui</button>
+            <button type="button" class="btn btn-danger" @click="closeConfirmationDialog">Non</button>
+          </div>
+        </div>
       </div>
     </div>
+    <div v-if="showConfirmationDialog" class="modal-backdrop fade show"></div>
   </div>
 </template>
 
@@ -48,38 +59,8 @@ export default {
 }
 </script>
 
-<style>
-.clear-modal {
-  display: block;
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.clear-modal-content {
-  background-color: #fff;
-  margin: 10% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+<style scoped>
+.modal.fade.show {
+  display: block !important;
 }
 </style>
