@@ -1,6 +1,6 @@
 <template>
   <div class="row g-0 text-center bg-custom-gradient vh-100 align-items-center">
-    <div class="col-lg-4 col-md-6 order-xs-2 order-md-1">
+    <div class="col-md-5 order-2 order-md-1">
       <div class="m-4 p-4 bg-white rounded box-custom overflow-y-auto" style="max-height: 500px; width: auto;">
         <div class="d-flex flex-row mb-3 d-flex justify-content-between">
           <h1 class="p-2 align-self-center fs-2">To Do List</h1>
@@ -25,9 +25,11 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-8 col-md-6 d-flex justify-content-center align-items-center order-xs-1 order-md-2">
-      <p class="fs-2 text-white typing-animation">
-        <span>To Do List with Vue.js and Bootstrap by Bertrand Oceane</span>
+    <div class="col-md-7 d-flex justify-content-center align-items-center order-1 order-md-2">
+      <p class="fs-3 text-white typing-animation">
+        To Do List with Vue.js and Bootstrap 
+        <br>
+        by Bertrand Oceane
       </p>
     </div>
   </div>
