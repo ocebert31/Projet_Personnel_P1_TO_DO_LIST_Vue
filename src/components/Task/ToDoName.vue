@@ -1,5 +1,5 @@
 <template>
-    <label :for="'checkbox-' + index" :class="{ 'styled': task.isChecked }" v-if="!task.isEditing">{{ task.name }}</label>
+    <label :for="'checkbox-' + index" :class="{'text-decoration-line-through': task.isChecked }" v-if="!task.isEditing">{{ task.name }}</label>
     <input :for="'checkbox-' + index" v-else type="text" @input="event => changeName(event.target.value)" :value="this.task.newName"/>
 </template>
 
@@ -16,9 +16,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  .styled {
-    text-decoration: line-through;
-  }
-</style>
