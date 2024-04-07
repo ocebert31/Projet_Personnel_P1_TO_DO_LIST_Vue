@@ -1,7 +1,7 @@
 <template>
   <div class="row g-0 text-center bg-custom-gradient vh-100 align-items-center">
-    <div class="col-6 col-md-4">
-      <div class="m-4 p-4 bg-white rounded box-custom">
+    <div class="col-lg-4 col-md-6">
+      <div class="m-4 p-4 bg-white rounded box-custom overflow-y-auto" style="max-height: 500px; width: auto;">
         <div class="d-flex flex-row mb-3 d-flex justify-content-between">
           <h1 class="p-2 align-self-center fs-2">To Do List</h1>
           <ToDoClear class="p-2 align-self-center" @tasks-cleared="clearTasks"></ToDoClear>
@@ -19,7 +19,7 @@
               </template>
             </draggable> -->
             <li v-for="(item, index) in todoList" :key="index">
-              <ToDoTask :task="item" :index="index" @task-updated="updateTask" @task-deleted="deleteTask" @confirmed-edit="confirmEdit"></ToDoTask>
+              <ToDoTask class="task-name" :task="item" :index="index" @task-updated="updateTask" @task-deleted="deleteTask" @confirmed-edit="confirmEdit"></ToDoTask>
             </li>
           </ul>
         </div>
@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-6 col-md-8 d-flex justify-content-center align-items-center">
+    <div class="col-lg-8 col-md-6 d-flex justify-content-center align-items-center">
       <p class="fs-2 text-white typing-animation">
         <span>To Do List with Vue.js and Bootstrap by Bertrand Oceane</span>
       </p>
@@ -187,5 +187,9 @@ export default {
 
   ul {
     list-style-type: none;
+  }
+
+  .task-name {
+    word-break: break-all;
   }
 </style>
