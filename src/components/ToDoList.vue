@@ -80,7 +80,6 @@ export default {
 
     addTask(task) {
       const currentDate = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
-      console.log(currentDate)
       this.todoList.push({name: task, isEditing: false, isChecked: false, newName: task, date: currentDate, precedence: this.todoList.length });
       this.saveList();
     },
@@ -109,7 +108,7 @@ export default {
     },
 
     orderTask(order) {
-      this.selected = order
+      this.selected = order;
       if (order === "name") {
         this.orderByNameAsc();
       } else if (order === "date") {
@@ -176,8 +175,8 @@ export default {
   }
 
   @keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
+    from { width: 0; }
+    to { width: 100%; }
   }
 
   .typing-animation {
