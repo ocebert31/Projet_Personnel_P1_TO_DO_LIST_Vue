@@ -32,7 +32,7 @@ export default {
   ToDoDelete,
   ToDoEdit,
   ToDoConfirmEdit,
-  ToDoCancelEdit
+  ToDoCancelEdit,
  },
 
  methods: {
@@ -51,12 +51,12 @@ export default {
   },
 
   confirmEdit() {
-    const updatedTask = {...this.task, name: this.task.newName, isEditing: !this.task.isEditing }
+    const updatedTask = {...this.task, name: this.task.newName, isEditing: !this.task.isEditing };
     this.$emit('task-updated', this.index, updatedTask);
   },
   
   changeName(newName) {
-    const updatedTask = {...this.task, newName: newName}
+    const updatedTask = {...this.task, newName: newName};
     this.$emit('task-updated', this.index, updatedTask);
   },
  }

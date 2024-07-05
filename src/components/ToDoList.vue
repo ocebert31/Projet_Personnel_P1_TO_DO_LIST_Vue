@@ -79,8 +79,7 @@ export default {
     },
 
     addTask(task) {
-      const currentDate = moment().format('YYYY-MM-DD HH:mm:ss');
-      console.log(currentDate)
+      const currentDate = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
       this.todoList.push({name: task, isEditing: false, isChecked: false, newName: task, date: currentDate, precedence: this.todoList.length });
       this.saveList();
     },
@@ -109,24 +108,18 @@ export default {
     },
 
     orderTask(order) {
-      this.selected = order
-      if (order === "name-asc") {
+      this.selected = order;
+      if (order === "name") {
         this.orderByNameAsc();
-      } else if (order === "name-desc") {
-        this.orderByNameDesc();
-      } else if (order === "date-desc") {
+      } else if (order === "date") {
         this.orderByDateDesc();
-      } else if (order === "date-asc") {
-        this.orderByDateAsc();
-      } else if (order === "precedence-desc") {
+      } else if (order === "precedence") {
         this.orderByPrecedenceDesc();
-      } else if (order === "precedence-asc") {
-        this.orderByPrecedenceAsc();
       }
     },
 
     orderByNameAsc() {
-      if (this.selected === "name-asc") {
+      if (this.selected === "name") {
         this.todoList.sort((a, b) => {
           return a.name.localeCompare(b.name);
         });
@@ -134,46 +127,19 @@ export default {
       } 
     },
 
-    orderByNameDesc() {
-      if (this.selected === "name-desc") {
-        this.todoList.sort((a, b) => {
-          return b.name.localeCompare(a.name);
-        });
-        this.saveList();
-      }
-    },
-
     orderByDateDesc() {
-      if (this.selected === "date-desc") {
+      if (this.selected === "date") {
         this.todoList.sort((a, b) => {
-          return new Date(b.date) - new Date(a.date);
+          return new Date(a.date) - new Date(b.date);
         });
         this.saveList();
-      }
-    },
-
-    orderByDateAsc() {
-      if (this.selected === "date-asc") {
-      this.todoList.sort((a, b) => {
-        return new Date(a.date) - new Date(b.date);
-      });
-      this.saveList();
       }
     },
 
     orderByPrecedenceDesc() {
-      if (this.selected === "precedence-desc") {
+      if (this.selected === "precedence") {
         this.todoList.sort((a, b) => {
           return a.precedence - b.precedence;
-        });
-        this.saveList();
-      }
-    },
-
-    orderByPrecedenceAsc() {
-      if (this.selected === "precedence-asc") {
-        this.todoList.sort((a, b) => {
-          return b.precedence - a.precedence;
         });
         this.saveList();
       }
@@ -209,8 +175,8 @@ export default {
   }
 
   @keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
+    from { width: 0; }
+    to { width: 100%; }
   }
 
   .typing-animation {

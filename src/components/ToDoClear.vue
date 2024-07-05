@@ -37,13 +37,12 @@ export default {
 
   data() {
     return {
-      showConfirmationDialog: false
+      showConfirmationDialog: false,
     };
   },
 
   methods: {
     openConfirmationDialog() {
-      console.log('pouet');
       this.showConfirmationDialog = true;
     },
 
