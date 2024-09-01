@@ -3,6 +3,9 @@
 ## Description
 This To-Do List application is a simple and efficient tool designed to help users manage their tasks. Built with React, it offers a user-friendly interface that allows users to add, edit, delete, and mark tasks as complete. The application aims to improve productivity by providing a clear and organized way to keep track of daily
 
+- **Demo**  
+  ![DEMO](./doc/demo.gif)
+
 ## Access the Application
 You can access the deployed application by visiting: [https://to-do-list-vue-04.netlify.app/](https://to-do-list-vue-04.netlify.app/)
 
@@ -11,7 +14,7 @@ You can access the deployed application by visiting: [https://to-do-list-vue-04.
 - Edit Tasks
 - Delete Tasks
 - Mark as Complete
-- Drag and Drop
+- Drag and Drop order
 - Filter Tasks
 - Responsive Design
 
